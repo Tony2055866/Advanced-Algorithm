@@ -3,14 +3,14 @@ package simpleGa;
 public class MainTest {
 	public static void main(String[] args) {
 
-		// Set a candidate solution
+		// 选择一个期望的基因序列。这个是由自己任意定
 		FitnessCalc
 				.setSolution("1111000000000000000000000000000000000000000000000000000000001111");
 
-		// Create an initial population
+		// 初始化一个种群
 		Population myPop = new Population(50, true);
 
-		// Evolve our population until we reach an optimum solution
+		// 不段迭代，进行进化操作。 直到找到期望的基因序列
 		int generationCount = 0;
 		while (myPop.getFittest().getFitness() < FitnessCalc.getMaxFitness()) {
 			generationCount++;

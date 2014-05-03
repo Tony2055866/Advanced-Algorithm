@@ -1,10 +1,7 @@
 package simpleGa;
 
-
 public class Population {
-
     Individual[] individuals;
-
     /*
      * 构造方法
      */
