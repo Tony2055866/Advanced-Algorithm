@@ -3,11 +3,12 @@ package simpleGa;
 public class Individual {
 
     static int defaultGeneLength = 64;
+    //基因序列
     private byte[] genes = new byte[defaultGeneLength];
-    // Cache
+    // 个体的 适应值
     private int fitness = 0;
 
-    // Create a random individual
+    // 创建一个随机的 基因个体
     public void generateIndividual() {
         for (int i = 0; i < size(); i++) {
             byte gene = (byte) Math.round(Math.random());

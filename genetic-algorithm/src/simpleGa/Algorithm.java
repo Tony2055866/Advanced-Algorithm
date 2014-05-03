@@ -2,15 +2,15 @@ package simpleGa;
 
 public class Algorithm {
 
-    /* GA parameters */
-    private static final double uniformRate = 0.5;
-    private static final double mutationRate = 0.015;
-    private static final int tournamentSize = 5;
+    /* GA 算法的参数 */
+    private static final double uniformRate = 0.5; //交叉概率
+    private static final double mutationRate = 0.015; //突变概率
+    private static final int tournamentSize = 5; //淘汰数组的大小
     private static final boolean elitism = true; //精英主义
 
     /* Public methods */
     
-    // Evolve a population
+    // 进化一个种群
     public static Population evolvePopulation(Population pop) {
     	// 存放新一代的种群
         Population newPopulation = new Population(pop.size(), false);
@@ -62,27 +62,26 @@ public class Algorithm {
 
     // 突变个体。 突变的概率为 mutationRate
     private static void mutate(Individual indiv) {
-        // Loop through genes
         for (int i = 0; i < indiv.size(); i++) {
             if (Math.random() <= mutationRate) {
-                // Create random gene
+                // 生成随机的 0 或 1
                 byte gene = (byte) Math.round(Math.random());
                 indiv.setGene(i, gene);
             }
         }
     }
 
-    // Select individuals for crossover
+    // 随机选择一个较优秀的个体，用了进行交叉
     private static Individual tournamentSelection(Population pop) {
         // Create a tournament population
-        Population tournament = new Population(tournamentSize, false);
-        // For each place in the tournament get a random individual
+        Population tournamentPop = new Population(tournamentSize, false);
+        //随机选择 tournamentSize 个放入 tournamentPop 中
         for (int i = 0; i < tournamentSize; i++) {
             int randomId = (int) (Math.random() * pop.size());
-            tournament.saveIndividual(i, pop.getIndividual(randomId));
+            tournamentPop.saveIndividual(i, pop.getIndividual(randomId));
         }
-        // Get the fittest
-        Individual fittest = tournament.getFittest();
+        // 找到淘汰数组中最优秀的
+        Individual fittest = tournamentPop.getFittest();
         return fittest;
     }
 }
